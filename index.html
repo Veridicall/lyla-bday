@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Lyla 💖</title>
+
+<style>
+body {
+  margin: 0;
+  overflow: hidden;
+  font-family: 'Poppins', sans-serif;
+  background: radial-gradient(circle at top, #0f0c29, #302b63, #24243e);
+  color: white;
+  text-align: center;
+}
+
+/* floating hearts */
+.heart {
+  position: fixed;
+  bottom: -10px;
+  color: #ff4da6;
+  animation: floatUp linear infinite;
+  opacity: 0.7;
+}
+
+@keyframes floatUp {
+  to {
+    transform: translateY(-110vh);
+  }
+}
+
+/* glow */
+.glow {
+  font-size: 3em;
+  margin-top: 20vh;
+  color: #ff9bd2;
+  text-shadow: 0 0 20px #ff4da6;
+}
+
+/* button */
+button {
+  margin-top: 20px;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 25px;
+  background: linear-gradient(45deg, #ff4da6, #ff9bd2);
+  color: white;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+/* typing */
+.typing {
+  margin-top: 20vh;
+  font-size: 1.5em;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* gift */
+.gift {
+  font-size: 4em;
+  margin-top: 20vh;
+  cursor: pointer;
+}
+
+/* final */
+.final-message {
+  margin-top: 20vh;
+  font-size: 1.6em;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+</head>
+
+<body>
+
+<audio id="bg-music" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<div id="app">
+  <div class="glow">HAI LYLAA</div>
+  <button onclick="start()">💖</button>
+</div>
+
+<script>
+
+/* 💖 floating hearts generator */
+setInterval(() => {
+  let heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "💖";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = (Math.random() * 20 + 10) + "px";
+  heart.style.animationDuration = (Math.random() * 5 + 5) + "s";
+  document.body.appendChild(heart);
+
+  setTimeout(() => heart.remove(), 8000);
+}, 300);
+
+/* 🎬 start */
+function start() {
+  let music = document.getElementById("bg-music");
+  music.volume = 0;
+  music.play();
+
+  let fade = setInterval(() => {
+    if (music.volume < 0.4) {
+      music.volume += 0.02;
+    } else clearInterval(fade);
+  }, 200);
+
+  document.getElementById("app").innerHTML = `
+    <div class="typing" id="typing"></div>
+    <br>
+    <button onclick="next()">yesyes</button>
+  `;
+
+  typeText("HAII BABYY I HOPE YOU'RE DOING GOOODDD", "typing");
+}
+
+/* ⌨️ typing */
+function typeText(text, id) {
+  let i = 0;
+  function typing() {
+    if (i < text.length) {
+      document.getElementById(id).innerHTML += text.charAt(i);
+      i++;
+      setTimeout(typing, 40);
+    }
+  }
+  typing();
+}
+
+/* 💬 second screen */
+function next() {
+  document.getElementById("app").innerHTML = `
+    <div class="typing" id="chat"></div>
+    <br>
+    <button onclick="gift()">🎁</button>
+  `;
+
+  let msg = "HAPPPY BIRTHDAYY LYLAAA YOU'RE 21 NOW GOOD JOBB. YOU'VE COME SO FAR IN LIFE BABY AND YOU'VE ENDURED SO MANY HARDSHIPS. YOU'VE DONE SOO MUCHH AND ACHIEVED A LOT IN MY EYES MY SWEET GIRL. I KNOW THINGS HAVE BEEN HARD BUT I JUST WANT YOU TO REMEMBER THAT I AM PROUD OF YOU NO MATTER WHAT OKAY. I LOVE YOU";
+
+  typeText(msg, "chat");
+}
+
+/* 🎁 gift screen */
+function gift() {
+  document.getElementById("app").innerHTML = `
+    <div class="gift" onclick="final()">🎁</div>
+    <p>open it 💖</p>
+  `;
+}
+
+/* 🎆 confetti */
+function confetti() {
+  for (let i = 0; i < 100; i++) {
+    let c = document.createElement("div");
+    c.innerHTML = "✨";
+    c.style.position = "fixed";
+    c.style.left = Math.random() * 100 + "vw";
+    c.style.top = Math.random() * 100 + "vh";
+    c.style.fontSize = "20px";
+    document.body.appendChild(c);
+
+    setTimeout(() => c.remove(), 2000);
+  }
+}
+
+/* 💌 final */
+function final() {
+  confetti();
+  document.body.innerHTML = `
+    <div class="final-message">
+      lyla you are the most beautiful part about my life and you're my safe place and you hold so much meaningg to meeee i don't just love you but choose you evey single day okay
+      <br><br>
+      Happy Birthday 💖
+      <br><br>
+      - Shams
+    </div>
+  `;
+}
+
+</script>
+
+</body>
+</html>
